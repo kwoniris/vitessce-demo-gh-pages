@@ -9,12 +9,12 @@ export const myViewConfig = {
         files: [
           {
             url: "https://data-1.vitessce.io/0.0.31/master_release/dries/dries.cells.json",
-            type: "cells",
+            type: "obs",
             fileType: "cells.json"
           },
           {
             url: "https://data-1.vitessce.io/0.0.31/master_release/dries/dries.cell-sets.json",
-            type: "cell-sets",
+            type: "obsSets",
             fileType: "cell-sets.json"
           }
         ]
