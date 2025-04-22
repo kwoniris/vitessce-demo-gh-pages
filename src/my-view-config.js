@@ -1,5 +1,5 @@
 export const myViewConfig = {
-    version: "1.0.4",
+    version: "1.0.15",
     name: "My example config",
     description: "This demonstrates the JSON schema",
     datasets: [
@@ -52,14 +52,14 @@ export const myViewConfig = {
         x: 0, y: 0, w: 6, h: 6
       },
       {
-        component: "cellSets",
+        component: "obsSets",
         coordinationScopes: {
           dataset: "A"
         },
         x: 0, y: 6, w: 6, h: 6
       },
       {
-        component: "cellSetSizes",
+        component: "obsSetSizes",
         coordinationScopes: {
           dataset: "A"
         },
