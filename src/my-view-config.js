@@ -1,70 +1,132 @@
 export const myViewConfig = {
-    version: "1.0.15",
-    name: "My example config",
-    description: "This demonstrates the JSON schema",
-    datasets: [
-      {
-        uid: "D1",
-        name: "Dries",
-        files: [
-          {
-            url: "https://data-1.vitessce.io/0.0.31/master_release/dries/dries.cells.json",
-            type: "obs",
-            fileType: "cells.json"
+  version: "1.0.15",
+  name: "10x visium human lymph node",
+  description: "This demonstrates the View Config for Vitessce.",
+  datasets: [
+    {
+      uid: "visium",
+      name: "visium",
+      files: [
+        {
+          fileType: "anndata-cells.zarr",
+          url: "http://localhost:9000/V1_Human_Lymph_Node.zarr",
+          coordinationValues: {
+            obsType: "cell",
+            featureType: "gene",
+            featureValueType: "transcript count"
           },
-          {
-            url: "https://data-1.vitessce.io/0.0.31/master_release/dries/dries.cell-sets.json",
-            type: "obsSets",
-            fileType: "cell-sets.json"
+          options: {
+            obsFeatureMatrix: {
+              path: "X"
+            },
+            featureLabels: {
+              path: "var/gene_ids"
+            },
+            obsEmbedding: [
+              {
+                path: "obsm/X_umap",
+                embeddingType: "UMAP",
+                dims: [0, 1]
+              },
+              {
+                path: "obsm/X_pca",
+                embeddingType: "PCA",
+                dims: [0, 1]
+              },
+              {
+                path: "obsm/X_hvg",
+                embeddingType: "HVG",
+                dims: [0, 1]
+              }
+            ]
           }
-        ]
-      }
-    ],
-    coordinationSpace: {
-      dataset: {
-        A: "D1"
-      },
-      embeddingType: {
-        A: "UMAP",
-        B: "t-SNE"
-      },
-      embeddingZoom: {
-        A: 2.5
-      }
+        },
+        {
+          fileType: "obsSets.anndata.zarr",
+          url: "http://localhost:9000/V1_Human_Lymph_Node.zarr",
+          coordinationValues: {
+            obsType: "cell",
+            obsSetType: "cell-sets"
+          },
+          options: [
+            {
+              name: "Cluster",
+              path: "obs/clusters"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  coordinationSpace: {
+    dataset: {
+      A: "visium"
     },
-    layout: [
-      {
-        component: "scatterplot",
-        coordinationScopes: {
-          dataset: "A",
-          embeddingType: "A",
-          embeddingZoom: "A"
-        },
-        x: 6, y: 0, w: 6, h: 6
+    embeddingType: {
+      A: "UMAP",
+      B: "PCA",
+      C: "HVG"
+    },
+    embeddingZoom: {
+      A: 2.5
+    }
+  },
+  layout: [
+    {
+      component: "scatterplot",
+      coordinationScopes: {
+        dataset: "A",
+        embeddingType: "A",
+        embeddingZoom: "A"
       },
-      {
-        component: "scatterplot",
-        coordinationScopes: {
-          dataset: "A",
-          embeddingType: "B",
-          embeddingZoom: "A"
-        },
-        x: 0, y: 0, w: 6, h: 6
+      x: 6,
+      y: 0,
+      w: 6,
+      h: 6
+    },
+    {
+      component: "scatterplot",
+      coordinationScopes: {
+        dataset: "A",
+        embeddingType: "B",
+        embeddingZoom: "A"
       },
-      {
-        component: "obsSets",
-        coordinationScopes: {
-          dataset: "A"
-        },
-        x: 0, y: 6, w: 6, h: 6
+      x: 0,
+      y: 0,
+      w: 6,
+      h: 6
+    },
+    {
+      component: "heatmap",
+      coordinationScopes: {
+        dataset: "A",
+        embeddingType: "C"
       },
-      {
-        component: "obsSetSizes",
-        coordinationScopes: {
-          dataset: "A"
-        },
-        x: 6, y: 6, w: 6, h: 6
-      }
-    ],
-    initStrategy: "auto"
-  };
+      x: 0,
+      y: 6,
+      w: 12,
+      h: 6
+    },
+    {
+      component: "obsSets",
+      coordinationScopes: {
+        dataset: "A"
+      },
+      x: 0,
+      y: 12,
+      w: 6,
+      h: 6
+    },
+    {
+      component: "obsSetSizes",
+      coordinationScopes: {
+        dataset: "A"
+      },
+      x: 6,
+      y: 12,
+      w: 6,
+      h: 6
+    }
+  ],
+  initStrategy: "auto"
+};
