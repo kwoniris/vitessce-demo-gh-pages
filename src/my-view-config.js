@@ -1,5 +1,5 @@
 export const myViewConfig = {
-    version: "1.0.15",
+    version: "1.0.4",
     name: "My example config",
     description: "This demonstrates the JSON schema",
     datasets: [
